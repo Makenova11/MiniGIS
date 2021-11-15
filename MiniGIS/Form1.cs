@@ -151,10 +151,10 @@ namespace MiniGIS
                     try
                     {
                         Layer mifLayer = new Layer();
+                        
                         mifLayer.name = MifFileDialog.FileName;
                         mifLayer.LoadFromFile(MifFileDialog.FileName);
                         map1.AddLayer(mifLayer);
-                        
                         map1.zoomToAll();
                         map1.Refresh();
                         layerControl1.RefreshList();

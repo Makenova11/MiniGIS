@@ -31,13 +31,13 @@ namespace MiniGIS
         public Map map;
         public GeoRect Bounce = new GeoRect(0,0,0,0);
 
-        public async void LoadFromFile(string fileName)
+        public  void LoadFromFile(string fileName)
         {
             using (FileStream fstream = File.OpenRead(fileName))
             {
                 byte[] array = new byte[fstream.Length];
                 
-                await fstream.ReadAsync(array, 0, array.Length);
+                fstream.Read(array, 0, array.Length);
 
                 string textFromFile = System.Text.Encoding.Default.GetString(array);
 
@@ -46,16 +46,51 @@ namespace MiniGIS
 
                 Pen pen = new Pen(Color.Black,5);
                 Line line = new Line(new GeoPoint(0,0),new GeoPoint(0,0));
-
+                SymbolStyle symbolStyle = new SymbolStyle();
+                Point point = new Point(new GeoPoint(0, 0));
+                line.style.colour = pen.Color;
                 for(int i =0;i<wordCoords.Length;i++)
                 {
-                    if(wordCoords[i] == "LINE")
+                    if(wordCoords[i].Contains("LINE")&&!wordCoords[i].Contains("P"))//:( color
                     {
-                        line = new Line(
-                            new GeoPoint(Convert.ToDouble(wordCoords[i + 1]), Convert.ToDouble(wordCoords[i + 2])),
-                            new GeoPoint(Convert.ToDouble(wordCoords[i + 3]), Convert.ToDouble(wordCoords[i + 4])));
+                        string[] arrayLine = wordCoords[i].Split(new char[] { ' ' },
+                            StringSplitOptions.RemoveEmptyEntries);
+
+                        
+                        line = new Line(new GeoPoint(Convert.ToDouble(arrayLine[1]), Convert.ToDouble(arrayLine[2])),
+                            new GeoPoint(Convert.ToDouble(arrayLine[3]), Convert.ToDouble(arrayLine[4]))
+                            );
+                        //,new LineStyle(4, 10, pen.Color)
+
                         this.AddObject(line);
+
                     }
+                    else if (wordCoords[i].Contains("PEN"))
+                    {
+                        string[] arrayPen = wordCoords[i].Split(new char[] { ' ',')','(',',' },
+                            StringSplitOptions.RemoveEmptyEntries);
+
+                        pen = new Pen(Color.FromArgb(Convert.ToInt32(arrayPen[3])));
+
+
+                    }
+                    else if (wordCoords[i].Contains("SYMBOL"))
+                    {
+                        string[] arraySymbol = wordCoords[i].Split(new char[] { ' ', ')', '(', ',' },
+                            StringSplitOptions.RemoveEmptyEntries);
+                        symbolStyle = new SymbolStyle(pen.Color, 16, Convert.ToByte(arraySymbol[1]), "Century Gothic");
+
+                    }
+                    else if (wordCoords[i].Contains("POINT")) //:(
+                    {
+                        string[] arrayPoint = wordCoords[i].Split(new char[] { ' '},
+                            StringSplitOptions.RemoveEmptyEntries);
+                        point = new Point(
+                            new GeoPoint(Convert.ToDouble(arrayPoint[1]), Convert.ToDouble(arrayPoint[2])));
+                        point.style = symbolStyle;
+                        this.AddObject(point);
+                    }
+
                 }
 
 

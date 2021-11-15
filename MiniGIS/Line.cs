@@ -20,6 +20,13 @@ namespace MiniGIS
             endPoint = end;
             style = new LineStyle();
         }
+
+        public Line(GeoPoint begin, GeoPoint end, LineStyle st)
+        {
+            beginPoint = begin;
+            endPoint = end;
+            style = st;
+        }
         public override void Draw(PaintEventArgs e)
         {
             System.Drawing.Point begin = layer.map.MapToScreen(beginPoint);
