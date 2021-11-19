@@ -59,8 +59,11 @@ namespace MiniGIS
                         
                         line = new Line(new GeoPoint(Convert.ToDouble(arrayLine[1]), Convert.ToDouble(arrayLine[2])),
                             new GeoPoint(Convert.ToDouble(arrayLine[3]), Convert.ToDouble(arrayLine[4]))
-                            );
-                        //,new LineStyle(4, 10, pen.Color)
+                        );
+                        
+                        line.style.colour = pen.Color;
+
+                        //,,new LineStyle(4, 10, pen.Color)
 
                         this.AddObject(line);
 
@@ -69,9 +72,13 @@ namespace MiniGIS
                     {
                         string[] arrayPen = wordCoords[i].Split(new char[] { ' ',')','(',',' },
                             StringSplitOptions.RemoveEmptyEntries);
+                        int color = Convert.ToInt32(arrayPen[3]);
 
-                        pen = new Pen(Color.FromArgb(Convert.ToInt32(arrayPen[3])));
+                        pen = new Pen(System.Drawing.Color.FromArgb(((color & 0xFF0000) / 65536)
+                                                                , (color & 0xFF00) / 256,
+                                                                (color & 0xFF)));
 
+                        //pen = new Pen(System.Drawing.Color.FromArgb(255,color));
 
                     }
                     else if (wordCoords[i].Contains("SYMBOL"))

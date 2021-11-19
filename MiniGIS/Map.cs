@@ -394,7 +394,10 @@ namespace MiniGIS
                         MapObject searchObject = FindObject(search);
                         if (flag)
                         {
-
+                            if (searchObject != null) 
+                            {
+                                searchObject.selected = true;
+                            }
                         }
                         else
                         {
