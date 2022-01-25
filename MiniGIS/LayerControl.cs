@@ -29,7 +29,7 @@ namespace MiniGIS
             }
             foreach (Layer layer in map.layers)
             {
-                if (layer.name != "Noname")
+                if (layer.name != "Ruler layer" && layer.name != "Noname")
                 {
                     ListViewItem listViewItem = listView1.Items.Insert(0, layer.name);
                     listViewItem.Checked = layer.Visible;
@@ -114,7 +114,7 @@ namespace MiniGIS
                     listView1.InsertionMark.AppearsAfterItem = false;
                 }
             }
-
+           
             listView1.InsertionMark.Index = targetIndex;
         }
 

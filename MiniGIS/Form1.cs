@@ -155,6 +155,8 @@ namespace MiniGIS
                         mifLayer.name = MifFileDialog.FileName;
                         mifLayer.LoadFromFile(MifFileDialog.FileName);
                         map1.AddLayer(mifLayer);
+                        map1.DeleteLayer(map1.RulerLayer);
+                        map1.AddLayer(map1.RulerLayer);
                         map1.zoomToAll();
                         map1.Refresh();
                         layerControl1.RefreshList();

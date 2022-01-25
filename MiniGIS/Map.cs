@@ -90,45 +90,45 @@ namespace MiniGIS
         public Map()
         {
             InitializeComponent();
-            var l = new Layer();
-            l.name = "Coords";
-            l.map = this;
-            layers.Add(l);
+            //var l = new Layer();
+            //l.name = "Coords";
+            //l.map = this;
+            //layers.Add(l);
 
 
-            layers[0].AddObject(new Line(new GeoPoint(0, -200), new GeoPoint(0, 200)));
-            layers[0].AddObject(new Line(new GeoPoint(-200, 0), new GeoPoint(200, 0)));
+            //layers[0].AddObject(new Line(new GeoPoint(0, -200), new GeoPoint(0, 200)));
+            //layers[0].AddObject(new Line(new GeoPoint(-200, 0), new GeoPoint(200, 0)));
 
-            var pl = new Polyline();
+            //var pl = new Polyline();
 
-            pl.style.colour = System.Drawing.Color.Blue;
-            pl.style.width = 4;
-            pl.AddNode(new GeoPoint(-50 + 10, -10));
-            pl.AddNode(new GeoPoint(-50 + 20, -30));
-            pl.AddNode(new GeoPoint(-50 + 30, -20));
-            pl.AddNode(new GeoPoint(-50 + 40, -40));
-            layers[0].AddObject(pl);
+            //pl.style.colour = System.Drawing.Color.Blue;
+            //pl.style.width = 4;
+            //pl.AddNode(new GeoPoint(-50 + 10, -10));
+            //pl.AddNode(new GeoPoint(-50 + 20, -30));
+            //pl.AddNode(new GeoPoint(-50 + 30, -20));
+            //pl.AddNode(new GeoPoint(-50 + 40, -40));
+            //layers[0].AddObject(pl);
 
-            var pg = new Polygon();
-            pg.style.colour = System.Drawing.Color.BlueViolet;
-            pg.style.width = 2;
+            //var pg = new Polygon();
+            //pg.style.colour = System.Drawing.Color.BlueViolet;
+            //pg.style.width = 2;
 
-            pg.AddNode(new GeoPoint(130, 10));
-            pg.AddNode(new GeoPoint(80, 100));
-            pg.AddNode(new GeoPoint(50, 30));
-            pg.fill = new System.Drawing.SolidBrush(System.Drawing.Color.Blue);
-            layers[0].AddObject(pg);
+            //pg.AddNode(new GeoPoint(130, 10));
+            //pg.AddNode(new GeoPoint(80, 100));
+            //pg.AddNode(new GeoPoint(50, 30));
+            //pg.fill = new System.Drawing.SolidBrush(System.Drawing.Color.Blue);
+            //layers[0].AddObject(pg);
 
 
-            var x = new Point(new GeoPoint(200, 20));
-            var newstylex = new SymbolStyle(System.Drawing.Color.Black, 14, (byte)'X', "Century Gothic");
-            x.style = newstylex;
-            layers[0].AddObject(x);
+            //var x = new Point(new GeoPoint(200, 20));
+            //var newstylex = new SymbolStyle(System.Drawing.Color.Black, 14, (byte)'X', "Century Gothic");
+            //x.style = newstylex;
+            //layers[0].AddObject(x);
 
-            var y = new Point(new GeoPoint(20, 180));
-            var newstyley = new SymbolStyle(System.Drawing.Color.Black, 14, (byte)'Y', "Century Gothic");
-            y.style = newstyley;
-            layers[0].AddObject(y);
+            //var y = new Point(new GeoPoint(20, 180));
+            //var newstyley = new SymbolStyle(System.Drawing.Color.Black, 14, (byte)'Y', "Century Gothic");
+            //y.style = newstyley;
+            //layers[0].AddObject(y);
 
             //Прямоугольник
 
@@ -144,19 +144,19 @@ namespace MiniGIS
             layers.Add(Cosmetic);
             
             //новый слой 
-            Layer newLayer = new Layer();
-            newLayer.name = "Layer2";
-            newLayer.map = this;
-            var pg2 = new Polygon();
-            pg2.style.colour = System.Drawing.Color.Chartreuse;
-            pg2.style.width = 2;
+            //Layer newLayer = new Layer();
+            //newLayer.name = "Layer2";
+            //newLayer.map = this;
+            //var pg2 = new Polygon();
+            //pg2.style.colour = System.Drawing.Color.Chartreuse;
+            //pg2.style.width = 2;
 
-            pg2.AddNode(new GeoPoint(-130, -10));
-            pg2.AddNode(new GeoPoint(-80, -100));
-            pg2.AddNode(new GeoPoint(-50, -30));
-            pg2.fill = new System.Drawing.SolidBrush(System.Drawing.Color.Chartreuse);
-            newLayer.AddObject(pg2);
-            layers.Add(newLayer);
+            //pg2.AddNode(new GeoPoint(-130, -10));
+            //pg2.AddNode(new GeoPoint(-80, -100));
+            //pg2.AddNode(new GeoPoint(-50, -30));
+            //pg2.fill = new System.Drawing.SolidBrush(System.Drawing.Color.Chartreuse);
+            //newLayer.AddObject(pg2);
+            //layers.Add(newLayer);
 
             //ИДЗ Линейка
             lineRuler = new Line(new GeoPoint(0, 0), new GeoPoint(0, 0));
@@ -236,6 +236,7 @@ namespace MiniGIS
                 RulerLayer.DeleteObject(lineRuler);
                 Refresh();
             }
+
             if (e.Button == MouseButtons.Left)
             {
                 mouseDownPosition = e.Location;
@@ -422,12 +423,10 @@ namespace MiniGIS
 
                     break;
                 case mapToolType.ruler:
-                    //var dx2 = (e.Location.X - mouseDownPosition.X) / mapScale;
-                    //var dy2 = (e.Location.Y - mouseDownPosition.Y) / mapScale;
-                    //mapCenter.x -= dx2;
-                    //mapCenter.y -= dy2;
-                    //mouseDownPosition = e.Location;
-                    //Refresh();
+                    
+                    mouseDownPosition = e.Location;
+                    //zoomToAll();
+                    Refresh();
                     break;
             }
 

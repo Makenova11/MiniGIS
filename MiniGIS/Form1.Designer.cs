@@ -121,6 +121,7 @@
             this.toolStripButton_CurrentObject.Name = "toolStripButton_CurrentObject";
             this.toolStripButton_CurrentObject.Size = new System.Drawing.Size(29, 24);
             this.toolStripButton_CurrentObject.Text = "toolStripButton5";
+            this.toolStripButton_CurrentObject.ToolTipText = "выделение";
             this.toolStripButton_CurrentObject.Click += new System.EventHandler(this.toolStripButton_CurrentObject_Click);
             // 
             // RulerStripButton
@@ -131,6 +132,7 @@
             this.RulerStripButton.Name = "RulerStripButton";
             this.RulerStripButton.Size = new System.Drawing.Size(29, 24);
             this.RulerStripButton.Text = "toolStripButton1";
+            this.RulerStripButton.ToolTipText = "линейка";
             this.RulerStripButton.Click += new System.EventHandler(this.RulerStripButton_Click);
             // 
             // statusStrip1
