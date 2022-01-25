@@ -37,7 +37,7 @@ namespace MiniGIS
                 {
                     if (i.Visible)
                     {
-                        geoRect = GeoRect.Union(geoRect, i.Bounce);
+                        geoRect = GeoRect.Union(geoRect, i.Bounds);
                     }
                 }
                 return geoRect;

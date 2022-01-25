@@ -41,6 +41,7 @@ namespace MiniGIS
 
         public static GeoRect Union(GeoRect A, GeoRect B)
         {
+            //проверка на null
             GeoRect C = new GeoRect(
                 Math.Min(A.minX, B.minX),
                 Math.Max(A.maxX, B.maxX),
