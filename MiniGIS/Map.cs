@@ -17,8 +17,8 @@ namespace MiniGIS
     {
         public double mapScale = 1;
         public GeoPoint mapCenter = new GeoPoint(0, 0);
-        public List<Layer> layers = new List<Layer>();
-        public List<Layer> layers2 = new List<Layer>();
+        public List<BaseLayer> layers = new List<BaseLayer>();
+        //public List<BaseLayer> layers2 = new List<BaseLayer>();
         public System.Drawing.Point mouseDownPosition;
         public bool isMouseDown = false;
         public Color selectedColor = Color.BlueViolet;
@@ -77,9 +77,9 @@ namespace MiniGIS
         //ИДЗ Линейка
         public Line lineRuler;
 
-        public Layer RulerLayer;
+        public VectorLayer RulerLayer;
         //Прямоугольник
-        public Layer Cosmetic;
+        public VectorLayer Cosmetic;
         public Polyline Border;
         public GeoRect georect;
         List<GeoPoint> listGeopoint = new List<GeoPoint>();
@@ -90,45 +90,6 @@ namespace MiniGIS
         public Map()
         {
             InitializeComponent();
-            //var l = new Layer();
-            //l.name = "Coords";
-            //l.map = this;
-            //layers.Add(l);
-
-
-            //layers[0].AddObject(new Line(new GeoPoint(0, -200), new GeoPoint(0, 200)));
-            //layers[0].AddObject(new Line(new GeoPoint(-200, 0), new GeoPoint(200, 0)));
-
-            //var pl = new Polyline();
-
-            //pl.style.colour = System.Drawing.Color.Blue;
-            //pl.style.width = 4;
-            //pl.AddNode(new GeoPoint(-50 + 10, -10));
-            //pl.AddNode(new GeoPoint(-50 + 20, -30));
-            //pl.AddNode(new GeoPoint(-50 + 30, -20));
-            //pl.AddNode(new GeoPoint(-50 + 40, -40));
-            //layers[0].AddObject(pl);
-
-            //var pg = new Polygon();
-            //pg.style.colour = System.Drawing.Color.BlueViolet;
-            //pg.style.width = 2;
-
-            //pg.AddNode(new GeoPoint(130, 10));
-            //pg.AddNode(new GeoPoint(80, 100));
-            //pg.AddNode(new GeoPoint(50, 30));
-            //pg.fill = new System.Drawing.SolidBrush(System.Drawing.Color.Blue);
-            //layers[0].AddObject(pg);
-
-
-            //var x = new Point(new GeoPoint(200, 20));
-            //var newstylex = new SymbolStyle(System.Drawing.Color.Black, 14, (byte)'X', "Century Gothic");
-            //x.style = newstylex;
-            //layers[0].AddObject(x);
-
-            //var y = new Point(new GeoPoint(20, 180));
-            //var newstyley = new SymbolStyle(System.Drawing.Color.Black, 14, (byte)'Y', "Century Gothic");
-            //y.style = newstyley;
-            //layers[0].AddObject(y);
 
             //Прямоугольник
 
@@ -138,29 +99,15 @@ namespace MiniGIS
             listGeopoint.Add(new GeoPoint(0, 0));
             listGeopoint.Add(new GeoPoint(0, 0));
 
-            Cosmetic = new Layer() { map = this };
+            Cosmetic = new VectorLayer() { map = this };
             Border = new Polyline(listGeopoint);
             Cosmetic.AddObject(Border);
             layers.Add(Cosmetic);
             
-            //новый слой 
-            //Layer newLayer = new Layer();
-            //newLayer.name = "Layer2";
-            //newLayer.map = this;
-            //var pg2 = new Polygon();
-            //pg2.style.colour = System.Drawing.Color.Chartreuse;
-            //pg2.style.width = 2;
-
-            //pg2.AddNode(new GeoPoint(-130, -10));
-            //pg2.AddNode(new GeoPoint(-80, -100));
-            //pg2.AddNode(new GeoPoint(-50, -30));
-            //pg2.fill = new System.Drawing.SolidBrush(System.Drawing.Color.Chartreuse);
-            //newLayer.AddObject(pg2);
-            //layers.Add(newLayer);
 
             //ИДЗ Линейка
             lineRuler = new Line(new GeoPoint(0, 0), new GeoPoint(0, 0));
-            RulerLayer = new Layer();
+            RulerLayer = new VectorLayer();
             RulerLayer.name = "Ruler layer";
             RulerLayer.map = this;
             lineRuler.style.colour = Color.Gold;
@@ -169,7 +116,7 @@ namespace MiniGIS
             layers.Add(RulerLayer);
         }
 
-        public void AddLayer(Layer lr)
+        public void AddLayer(BaseLayer lr)
         {
             layers.Add(lr);
             lr.map = this;
@@ -178,12 +125,12 @@ namespace MiniGIS
                 layerControl.RefreshList();
             }
         }
-        public void DeleteLayer(Layer lr)
+        public void DeleteLayer(BaseLayer lr)
         {
             layers.Remove(lr);
             layerControl.RefreshList();
         }
-        public void InsertLayer(int index, Layer lr)
+        public void InsertLayer(int index, BaseLayer lr)
         {
             layers.Insert(index, lr);
             lr.map = this;
@@ -215,7 +162,7 @@ namespace MiniGIS
 
         private void Map_Paint(object sender, PaintEventArgs e)
         {
-            foreach (Layer lr in layers)
+            foreach (VectorLayer lr in layers)
             {
                 if (lr.Visible)
                 {
@@ -315,9 +262,9 @@ namespace MiniGIS
             MapObject result = null;
             for (int i = layers.Count - 1; i >= 0; i--)
             {
-                if (layers[i].Visible)
+                if (layers[i].Visible && layers[i] is VectorLayer)
                 {
-                    result = layers[i].FindObject(search);
+                    result = (layers[i] as VectorLayer).FindObject(search);
                     if (result != null)
                     {
                         return result;
@@ -401,13 +348,16 @@ namespace MiniGIS
                             }
                         }
                         else
-                        {
-                            foreach (var i in layers)
+                        { 
+                            if(layers.GetType() is VectorLayer)
                             {
-                                foreach (var j in i.objects)
+                                foreach (var i in layers)
                                 {
-                                    j.selected = false;
+                                    foreach (var j  in (i as VectorLayer).objects)
+                                    {
+                                        j.selected = false;
 
+                                    }
                                 }
                             }
                             if (searchObject != null) // если нашли выделяем
