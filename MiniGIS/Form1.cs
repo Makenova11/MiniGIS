@@ -150,7 +150,7 @@ namespace MiniGIS
                 {
                     try
                     {
-                        Layer mifLayer = new Layer();
+                        VectorLayer mifLayer = new VectorLayer();
                         
                         mifLayer.name = MifFileDialog.FileName;
                         mifLayer.LoadFromFile(MifFileDialog.FileName);
@@ -167,6 +167,32 @@ namespace MiniGIS
                     }
                 }
             }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            var gridGeom = new GridGeometry(-100, -200, 10, 20, 1);
+            var gridLayer = new GridLayer(gridGeom);
+            var rand = new Random();
+            double z_min = double.MaxValue;
+            double z_max = double.MinValue;
+            int count = 0;
+            for (int i = 0; i < gridGeom.CountY; i++)
+            {
+                for(int j = 0; j<gridGeom.CountX; j++)
+                {
+                    gridLayer.SetNode(i, j, rand.NextDouble() * 100 - 50);
+                    var value = gridLayer.GetNode(i, j);
+                    z_min = Math.Min(z_min,value);
+                    z_max = Math.Max(z_max,value);
+                    count++;
+                    
+                }
+            }
+
+            var r = count;
+            
+
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MiniGIS_Makenova));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_ZoomIn = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_ZoomOut = new System.Windows.Forms.ToolStripButton();
@@ -41,10 +42,11 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripRulerLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.button1 = new System.Windows.Forms.Button();
-            this.MifFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.map1 = new MiniGIS.Map();
+            this.button1 = new System.Windows.Forms.Button();
             this.layerControl1 = new MiniGIS.LayerControl();
+            this.MifFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -62,10 +64,11 @@
             this.toolStripButton_Center,
             this.toolStripButton_Hand,
             this.toolStripButton_CurrentObject,
-            this.RulerStripButton});
-            this.toolStrip1.Location = new System.Drawing.Point(10, 10);
+            this.RulerStripButton,
+            this.toolStripButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(8, 8);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(902, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(676, 27);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -143,9 +146,10 @@
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3,
             this.toolStripRulerLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(10, 522);
+            this.statusStrip1.Location = new System.Drawing.Point(8, 419);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(902, 26);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(676, 26);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -177,7 +181,8 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(10, 37);
+            this.splitContainer1.Location = new System.Drawing.Point(8, 35);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -188,55 +193,70 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.button1);
             this.splitContainer1.Panel2.Controls.Add(this.layerControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(902, 485);
-            this.splitContainer1.SplitterDistance = 598;
+            this.splitContainer1.Size = new System.Drawing.Size(676, 384);
+            this.splitContainer1.SplitterDistance = 448;
+            this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 3;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(252, 455);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(45, 27);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "+";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // MifFileDialog
-            // 
-            this.MifFileDialog.FileName = "testMif";
             // 
             // map1
             // 
             this.map1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.map1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.map1.Location = new System.Drawing.Point(0, 0);
+            this.map1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.map1.Name = "map1";
-            this.map1.Size = new System.Drawing.Size(598, 485);
+            this.map1.Size = new System.Drawing.Size(448, 384);
             this.map1.TabIndex = 0;
             this.map1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.map1_MouseDown);
             this.map1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.map1_MouseMove);
             this.map1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.map1_MouseUp);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(189, 370);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(34, 22);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "+";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // layerControl1
             // 
             this.layerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layerControl1.Location = new System.Drawing.Point(0, 0);
+            this.layerControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.layerControl1.Name = "layerControl1";
-            this.layerControl1.Size = new System.Drawing.Size(300, 485);
+            this.layerControl1.Size = new System.Drawing.Size(225, 384);
             this.layerControl1.TabIndex = 0;
+            // 
+            // MifFileDialog
+            // 
+            this.MifFileDialog.FileName = "testMif";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // MiniGIS_Makenova
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(922, 558);
+            this.ClientSize = new System.Drawing.Size(692, 453);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MiniGIS_Makenova";
-            this.Padding = new System.Windows.Forms.Padding(10);
+            this.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.Text = "MiniGIS";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -270,6 +290,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripRulerLabel;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.OpenFileDialog MifFileDialog;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 

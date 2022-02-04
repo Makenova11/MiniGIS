@@ -9,7 +9,7 @@ namespace MiniGIS
 {
     public abstract class MapObject
     {
-        public Layer layer;
+        public BaseLayer layer;
         public abstract void Draw(PaintEventArgs e);
 
         public bool selected = false;

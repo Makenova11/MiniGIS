@@ -54,6 +54,8 @@
     </Compile>
     <Compile Include="GeoRect.cs" />
     <Compile Include="BaseLayer.cs" />
+    <Compile Include="GridGeometry.cs" />
+    <Compile Include="GridLayer.cs" />
     <Compile Include="LayerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

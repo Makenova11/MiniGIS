@@ -27,7 +27,7 @@ namespace MiniGIS
             {
                 return;
             }
-            foreach (Layer layer in map.layers)
+            foreach (BaseLayer layer in map.layers)
             {
                 if (layer.name != "Ruler layer" && layer.name != "Noname")
                 {
@@ -47,7 +47,7 @@ namespace MiniGIS
 
         private void listView1_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            Layer layer = (Layer)e.Item.Tag;
+            BaseLayer layer = (BaseLayer)e.Item.Tag;
             if (layer == null)
             {
                 return;
@@ -125,11 +125,11 @@ namespace MiniGIS
                 return;
             }
 
-            List<Layer> tempLayers = new List<Layer>();
+            List<BaseLayer> tempLayers = new List<BaseLayer>();
 
             for (int i = listView1.Items.Count-1; i >= 0; i--)
             {
-                tempLayers.Add(listView1.Items[i].Tag as Layer);
+                tempLayers.Add(listView1.Items[i].Tag as BaseLayer);
             }
 
             map.layers = tempLayers;
